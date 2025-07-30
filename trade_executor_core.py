@@ -1,10 +1,15 @@
 import ccxt
 import time
+from env_loader import load_api_keys
 
 class TradeExecutor:
-    def __init__(self, api_keys):
+    def __init__(self):
+        self.api_keys = load_api_keys()
         self.exchanges = {}
-        for name, keys in api_keys.items():
+        self.init_exchanges()
+
+    def init_exchanges(self):
+        for name, keys in self.api_keys.items():
             exchange_class = getattr(ccxt, name)
             self.exchanges[name] = exchange_class({
                 'apiKey': keys['apiKey'],
