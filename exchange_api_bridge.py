@@ -1,9 +1,23 @@
 import ccxt
+from env_loader import load_env_variables
+
+env_vars = load_env_variables()
+
+api_keys = {
+    "binance": {
+        "apiKey": env_vars["BINANCE_API_KEY"],
+        "secret": env_vars["BINANCE_SECRET_KEY"]
+    },
+    "bybit": {
+        "apiKey": env_vars["BYBIT_API_KEY"],
+        "secret": env_vars["BYBIT_SECRET_KEY"]
+    }
+}
 
 class ExchangeAPIBridge:
-    def __init__(self, credentials):
+    def __init__(self):
         self.exchanges = {}
-        self.init_exchanges(credentials)
+        self.init_exchanges(api_keys)
 
     def init_exchanges(self, credentials):
         for name, creds in credentials.items():
