@@ -29,5 +29,4 @@ jobs:
         if [ -f tests/test_main.py ]; then
           pytest tests/test_main.py
         else
-          echo "No tests found. Skipping tests."
-        fi
+          echo "⚠️ No tests found. Skipping tests."
