@@ -1,12 +1,12 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler
+import os
 
-TOKEN = "PASTE_YOUR_TELEGRAM_BOT_TOKEN_HERE"
+TOKEN = os.getenv("BOT_TOKEN")  # Add BOT_TOKEN in Render env vars
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Onimisiakaami Bot is ready to trade!")
+async def start(update, context):
+    await update.message.reply_text("Onimisiakaami Bot is active!")
 
-app = ApplicationBuilder().token(TOKEN).build()
-app.add_handler(CommandHandler("start", start))
-
-app.run_polling()
+if __name__ == '__main__':
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    app.run_polling()
